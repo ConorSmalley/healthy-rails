@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Patient:</strong>
+  <%= Patient.find(@blood_pressure.patient_id).fullname %>
+</p>
+
+<p>
+  <strong>Systolic:</strong>
+  <%= @blood_pressure.systolic %>
+</p>
+
+<p>
+  <strong>Diastolic:</strong>
+  <%= @blood_pressure.diastolic %>
+</p>
+
+<p>
+  <strong>Dt:</strong>
+  <%= @blood_pressure.dt %>
+</p>
+
+<%= link_to 'Edit', edit_blood_pressure_path(@blood_pressure) %> |
+<%= link_to 'Back', blood_pressures_path %>

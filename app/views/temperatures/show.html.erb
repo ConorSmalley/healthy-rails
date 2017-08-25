@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Patient:</strong>
+  <%= Patient.find(@temperature.patient_id).fullname %>
+</p>
+
+<p>
+  <strong>Temperature:</strong>
+  <%= @temperature.temperature %>
+</p>
+
+<p>
+  <strong>Dt:</strong>
+  <%= @temperature.dt %>
+</p>
+
+<%= link_to 'Edit', edit_temperature_path(@temperature) %> |
+<%= link_to 'Back', temperatures_path %>

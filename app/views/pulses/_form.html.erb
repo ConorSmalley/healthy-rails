@@ -1,0 +1,29 @@
+<%= form_for(@pulse) do |f| %>
+  <% if @pulse.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@pulse.errors.count, "error") %> prohibited this pulse from being saved:</h2>
+
+      <ul>
+      <% @pulse.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :patient_id %><br>
+    <%= collection_select(:pulse, :patient_id, Patient.all, :id, :fullname, prompt: true) %>
+  </div>
+  <div class="field">
+    <%= f.label :pulse %><br>
+    <%= f.number_field :pulse %>
+  </div>
+  <div class="field">
+    <%= f.label :dt %><br>
+    <%= f.datetime_select :dt %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  patient_id: 1
+  temperature: 9.99
+  dt: 2017-08-25 10:38:58
+
+two:
+  patient_id: 1
+  temperature: 9.99
+  dt: 2017-08-25 10:38:58

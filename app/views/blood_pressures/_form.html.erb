@@ -1,0 +1,33 @@
+<%= form_for(@blood_pressure) do |f| %>
+  <% if @blood_pressure.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@blood_pressure.errors.count, "error") %> prohibited this blood_pressure from being saved:</h2>
+
+      <ul>
+      <% @blood_pressure.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :patient_id %><br>
+    <%= collection_select(:blood_pressure, :patient_id, Patient.all, :id, :fullname, prompt: true) %>
+  </div>
+  <div class="field">
+    <%= f.label :systolic %><br>
+    <%= f.number_field :systolic %>
+  </div>
+  <div class="field">
+    <%= f.label :diastolic %><br>
+    <%= f.number_field :diastolic %>
+  </div>
+  <div class="field">
+    <%= f.label :dt %><br>
+    <%= f.datetime_select :dt %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

@@ -1,0 +1,21 @@
+<%= form_for(@blood_group) do |f| %>
+  <% if @blood_group.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@blood_group.errors.count, "error") %> prohibited this blood_group from being saved:</h2>
+
+      <ul>
+      <% @blood_group.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :bloodgroup %><br>
+    <%= f.text_field :bloodgroup %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

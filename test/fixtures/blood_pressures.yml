@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  patient_id: 1
+  systolic: 1
+  diastolic: 1
+  dt: 2017-08-25 12:59:52
+
+two:
+  patient_id: 1
+  systolic: 1
+  diastolic: 1
+  dt: 2017-08-25 12:59:52

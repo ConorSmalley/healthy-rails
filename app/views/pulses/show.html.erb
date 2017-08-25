@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Patient:</strong>
+  <%= Patient.find(@pulse.patient_id).fullname %>
+</p>
+
+<p>
+  <strong>Pulse:</strong>
+  <%= @pulse.pulse %>
+</p>
+
+<p>
+  <strong>Dt:</strong>
+  <%= @pulse.dt %>
+</p>
+
+<%= link_to 'Edit', edit_pulse_path(@pulse) %> |
+<%= link_to 'Back', pulses_path %>

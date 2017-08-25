@@ -1,0 +1,33 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Blood Pressures</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Patient</th>
+      <th>Systolic</th>
+      <th>Diastolic</th>
+      <th>Dt</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @blood_pressures.each do |blood_pressure| %>
+      <tr>
+        <td><%= Patient.find(blood_pressure.patient_id).fullname %></td>
+        <td><%= blood_pressure.systolic %></td>
+        <td><%= blood_pressure.diastolic %></td>
+        <td><%= blood_pressure.dt %></td>
+        <td><%= link_to 'Show', blood_pressure %></td>
+        <td><%= link_to 'Edit', edit_blood_pressure_path(blood_pressure) %></td>
+        <td><%= link_to 'Destroy', blood_pressure, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Blood pressure', new_blood_pressure_path %>

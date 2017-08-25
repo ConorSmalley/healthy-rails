@@ -1,0 +1,22 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Firstname:</strong>
+  <%= @patient.firstName %>
+</p>
+
+<p>
+  <strong>Surname:</strong>
+  <%= @patient.surname %>
+</p>
+<p>
+  <strong>BloodGroup:</strong>
+  <% if @patient.bloodgroup_id.present? %>
+    <%= BloodGroup.find(@patient.bloodgroup_id).bloodgroup %>
+  <% else %>
+    NONE
+  <% end %>
+</p>
+
+<%= link_to 'Edit', edit_patient_path(@patient) %> |
+<%= link_to 'Back', patients_path %>
