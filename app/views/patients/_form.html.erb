@@ -10,7 +10,12 @@
       </ul>
     </div>
   <% end %>
-
+  
+  <div class="field">
+    <%= f.label :title %><br>
+    <!--<%= f.text_field :title %>-->
+    <%= f.select :title, ['','Mr', 'Miss', 'Ms', 'Mrs']%>
+  </div>
   <div class="field">
     <%= f.label :firstName %><br>
     <%= f.text_field :firstName %>
@@ -20,9 +25,13 @@
     <%= f.text_field :surname %>
   </div>
   <div class="field">
+    <%= f.label :gender %><br>
+    <!--<%= f.text_field :gender %>-->
+    <%= f.select :gender, ['','Male', 'Female']%>
+  </div>
+  <div class="field">
     <%= f.label :bloodgroup_id %><br>
-    <!--<%= collection_select(:Patient, :bloodgroup_id, BloodGroup.all, :id, :bloodgroup, prompt: true) %>-->
-    <%= collection_select(:patient, :bloodgroup_id, BloodGroup.all, :id, :bloodgroup, prompt: true) %>
+    <%= collection_select(:patient, :bloodgroup_id, BloodGroup.all.order(bloodgroup: :asc), :id, :bloodgroup, prompt: true) %>
   </div>
   <div class="actions">
     <%= f.submit %>

@@ -1,0 +1,23 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Patient:</strong>
+  <%= Patient.find(@drug_administration.patient_id).fullname %>
+</p>
+
+<p>
+  <strong>Medication:</strong>
+  <%= Medication.find(@drug_administration.medication_id).formulatedName %>
+</p>
+<p>
+  <strong>Quantity:</strong>
+  <%= @drug_administration.quantity %>
+</p>
+
+<p>
+  <strong>Dt:</strong>
+  <%= @drug_administration.dt %>
+</p>
+
+<%= link_to 'Edit', edit_drug_administration_path(@drug_administration) %> |
+<%= link_to 'Back', drug_administrations_path %>

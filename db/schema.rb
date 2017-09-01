@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170825125952) do
+ActiveRecord::Schema.define(version: 20170831151839) do
 
   create_table "blood_groups", force: :cascade do |t|
     t.string   "bloodgroup"
@@ -28,12 +28,61 @@ ActiveRecord::Schema.define(version: 20170825125952) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "contains", force: :cascade do |t|
+    t.integer  "medication_id"
+    t.integer  "drug_id"
+    t.integer  "dose"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+  end
+
+  create_table "doses", force: :cascade do |t|
+    t.integer  "medication_id"
+    t.integer  "drug_id"
+    t.integer  "dose"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+  end
+
+  create_table "drug_administrations", force: :cascade do |t|
+    t.integer  "patient_id"
+    t.integer  "medication_id"
+    t.datetime "dt"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+    t.decimal  "quantity"
+  end
+
+  create_table "drugs", force: :cascade do |t|
+    t.string   "drug"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "medication_drugs", force: :cascade do |t|
+    t.integer  "medication_id"
+    t.integer  "drug_id"
+    t.integer  "drugMg"
+    t.integer  "drugMl"
+    t.string   "format"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+  end
+
+  create_table "medications", force: :cascade do |t|
+    t.string   "medication"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "patients", force: :cascade do |t|
     t.string   "firstName"
     t.string   "surname"
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
     t.integer  "bloodgroup_id"
+    t.string   "title"
+    t.string   "gender"
   end
 
   create_table "pulses", force: :cascade do |t|

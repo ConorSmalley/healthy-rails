@@ -1,0 +1,33 @@
+<%= form_for(@drug_administration) do |f| %>
+  <% if @drug_administration.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@drug_administration.errors.count, "error") %> prohibited this drug_administration from being saved:</h2>
+
+      <ul>
+      <% @drug_administration.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :patient_id %><br>
+    <%= collection_select(:drug_administration, :patient_id, Patient.all, :id, :fullname, prompt: true) %>
+  </div>
+  <div class="field">
+    <%= f.label :medication_id %><br>
+    <%= collection_select(:drug_administration, :medication_id, Medication.all, :id, :formulatedName, prompt: true) %>
+  </div>
+  <div class="field">
+    <%= f.label :quantity %><br>
+    <%= f.number_field :quantity %>
+  </div>
+  <div class="field">
+    <%= f.label :dt %><br>
+    <%= f.datetime_select :dt %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

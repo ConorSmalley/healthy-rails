@@ -1,14 +1,37 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Workspace</title>
+  <title><%= yield(:title) %></title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
 </head>
 <body>
-
+<%= link_to 'Home', static_pages_index_path %>
+<div>
 <%= yield %>
+</div>
+</br>
 
+
+<div>
+  Patients
+  <%= link_to 'Patients', patients_path %>
+</div>
+<div>
+  Stats
+  <%= link_to 'Temperatures', temperatures_path %>
+  <%= link_to 'Pulses', pulses_path %>
+  <%= link_to 'Blood Pressures', blood_pressures_path %>
+</div>
+<div>
+  Drugs
+  <%= link_to 'Medication', medications_path %>
+  <%= link_to 'medication drugs', medication_drugs_path %>
+  <%= link_to 'Drugs', drugs_path %>
+</div>
+<div>
+  <%= link_to 'Administer Drugs', drug_administrations_path %>
+</div>
 </body>
 </html>

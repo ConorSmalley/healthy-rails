@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  resources :drug_administrations
+  resources :medication_drugs
+  resources :medications
+  resources :drugs
   get 'static_pages/index'
 
   resources :blood_pressures
@@ -8,6 +12,7 @@ Rails.application.routes.draw do
   resources :patients
   
   root 'static_pages#index'
+
   
   # root :to => "patients#index"  #kittens controller, index action (method)
   

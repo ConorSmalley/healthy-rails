@@ -1,0 +1,35 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Medication Drugs</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Medication</th>
+      <th>Drug</th>
+      <th>Drugmg</th>
+      <th>Drugml</th>
+      <th>Format</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @medication_drugs.each do |medication_drug| %>
+      <tr>
+        <td><%= Medication.find(medication_drug.medication_id).medication %></td>
+        <td><%= Drug.find(medication_drug.drug_id).drug %></td>
+        <td><%= medication_drug.drugMg %></td>
+        <td><%= medication_drug.drugMl %></td>
+        <td><%= medication_drug.format %></td>
+        <td><%= link_to 'Show', medication_drug %></td>
+        <td><%= link_to 'Edit', edit_medication_drug_path(medication_drug) %></td>
+        <td><%= link_to 'Destroy', medication_drug, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Medication drug', new_medication_drug_path %>

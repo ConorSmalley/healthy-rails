@@ -1,0 +1,43 @@
+<%= form_for(@medication_drug) do |f| %>
+  <% if @medication_drug.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@medication_drug.errors.count, "error") %> prohibited this medication_drug from being saved:</h2>
+
+      <ul>
+      <% @medication_drug.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <!--<div class="field">-->
+  <!--  <%= f.label :medication_id %><br>-->
+  <!--  <%= f.number_field :medication_id %>-->
+  <!--</div>-->
+  <div class="field">
+    <%= f.label :medication_id %><br>
+    <!--<%= collection_select(:medication_drug, :medication_id, Medication.all, :id, :medication, prompt: true) %>-->
+    <%= collection_select(:medication_drug, :medication_id, Medication.all, :id, :formulatedName, prompt: true) %>
+  </div>
+  
+  <div class="field">
+    <%= f.label :drug_id %><br>
+    <%= collection_select(:medication_drug, :drug_id, Drug.all, :id, :drug, prompt: true) %>
+  </div>
+  
+  <div class="field">
+    <%= f.label :drugMg %><br>
+    <%= f.number_field :drugMg %>
+  </div>
+  <div class="field">
+    <%= f.label :drugMl %><br>
+    <%= f.number_field :drugMl %>
+  </div>
+  <div class="field">
+    <%= f.label :format %><br>
+    <%= f.text_field :format %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

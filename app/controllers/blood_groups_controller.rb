@@ -4,7 +4,7 @@ class BloodGroupsController < ApplicationController
   # GET /blood_groups
   # GET /blood_groups.json
   def index
-    @blood_groups = BloodGroup.all
+    @blood_groups = BloodGroup.all.order(bloodgroup: :asc)
   end
 
   # GET /blood_groups/1

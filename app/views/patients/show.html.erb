@@ -1,22 +1,56 @@
-<p id="notice"><%= notice %></p>
-
-<p>
-  <strong>Firstname:</strong>
-  <%= @patient.firstName %>
-</p>
-
-<p>
-  <strong>Surname:</strong>
-  <%= @patient.surname %>
-</p>
-<p>
-  <strong>BloodGroup:</strong>
-  <% if @patient.bloodgroup_id.present? %>
-    <%= BloodGroup.find(@patient.bloodgroup_id).bloodgroup %>
-  <% else %>
-    NONE
-  <% end %>
-</p>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-12">
+      <p id="notice"><%= notice %></p>
+      <% if @patient.OD.present? %>
+        <p class="text-center"><%= @patient.OD %></p>
+      <% end %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <div class="col-md-12">
+        <p>
+          <strong>Name:</strong>
+          <%= @patient.fullname %>
+        </p>
+        
+        <p>
+          <strong>Gender:</strong>
+          <%= @patient.gender %>
+        </p>
+        
+        <p>
+          <strong>BloodGroup:</strong>
+          <% if @patient.bloodgroup_id.present? %>
+            <%= BloodGroup.find(@patient.bloodgroup_id).bloodgroup %>
+          <% else %>
+            NONE
+          <% end %>
+        </p>
+      </div>
+      <div class="col-md-12">
+        <h4>Medication</h4>
+        <%= simple_format @patient.meds %>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="col-md-12 col-sm-12">
+        <%= line_chart [
+          {name:"pulse", data: @patient.pulses.group(:dt).maximum(:pulse)},
+          {name:"temperature", data: @patient.temperatures.group(:dt).maximum(:temperature)}
+        ]%>
+      </div>
+      <div class="col-md-12 col-sm-12">
+        <%= line_chart [
+          {name:"Systolic", data: @patient.blood_pressures.group(:dt).maximum(:systolic)},
+          {name:"Diastolic", data: @patient.blood_pressures.group(:dt).maximum(:diastolic)}
+        ] %>
+      </div>
+    </div>
+  </div>
+</div>
+<!--<%= pie_chart({"Football" => 10, "Basketball" => 5}) %>-->
 
 <%= link_to 'Edit', edit_patient_path(@patient) %> |
 <%= link_to 'Back', patients_path %>

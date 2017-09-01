@@ -1,3 +1,4 @@
+<% content_for :title, "All Patients" %>
 <p id="notice"><%= notice %></p>
 
 <h1>Listing Patients</h1>
@@ -5,8 +6,11 @@
 <table>
   <thead>
     <tr>
+      <!--<th>Patient</th>-->
+      <th>Title</th>
       <th>Firstname</th>
       <th>Surname</th>
+      <th>Gender</th>
       <th>BloodGroup</th>
       <th colspan="3"></th>
     </tr>
@@ -15,8 +19,11 @@
   <tbody>
     <% @patients.each do |patient| %>
       <tr>
+        <!--<td><%= patient.fullname %></td>-->
+        <td><%= patient.title %></td>
         <td><%= patient.firstName %></td>
         <td><%= patient.surname %></td>
+        <td><%= patient.gender %></td>
         <td>
           <% if patient.bloodgroup_id.present? %>
             <%= BloodGroup.find(patient.bloodgroup_id).bloodgroup %>
