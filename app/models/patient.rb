@@ -11,45 +11,39 @@ class Patient < ActiveRecord::Base
         str = "ERR"
         return str
     end
-    def meds
+    def medOD
+        str = ""
+        Drug.all.each do |drug|
+            drugmg=0
+            str = str + drug.drug
+            DrugAdministration.where(patient_id: self.id).each do |da|
+                Medication.where(id: da.medication_id).each do |m|
+                    MedicationDrug.where(medication_id: m.id, drug_id: drug.id).each do |md|
+                        drugmg = drugmg + (da.quantity * (md.drugMg / md.drugMl))
+                    end
+                end
+            end
+            str = str + " " + drugmg.to_s + " mg"
+            str = str + "<br>"
+        end
+        return str
+    end
+    def medHistory
         str = ""
         DrugAdministration.where(patient_id: self.id).each do |da|
-            # str = str + da.quantity.to_s + " "
-            puts da
-            str = str + "pid: " + da.patient_id.to_s + "<br>"
-            str = str + "quantity: " + da.quantity.to_s
-            # MedicationDrug.where(medication_id: da.medication_id).each do |md|
-            #     str = str + md.drugMg.to_s + " " + md.drugMl.to_s + " "
-            #     Drug.where(id: md.drug_id).each do |dr|
-            #          str = str + dr.drug
-            #     end
-            # end
-            str = str + "<br>" + "<br>"
+            str = str + da.dt.to_s + "<br>"
+            str = str + da.quantity.to_s + " x "
+            Medication.where(id: da.medication_id).each do |med|
+                str = str + " " + Medication.find(med.id).formulatedName + "<br>" #med.medication
+                MedicationDrug.where(medication_id: med.id).each do |md|
+                    str = str + (da.quantity * md.drugMg).to_s + "Mg (" + da.quantity.to_s + " x " + md.drugMg.to_s + "Mg "
+                    Drug.where(id: md.drug_id).each do |d|
+                        str = str + d.drug + ")<br>"
+                    end
+                end
+            end
+            str = str + "<br>"
         end
-        
-        Patient.select(
-          [
-            Patient.arel_table[:id], Patient.arel_table[:fullname], Medication.arel_table[:formulatedName], MedicationDrug.arel_table[:drugMg], MedicationDrug.arel_table[:drugMl].as('MedicationDrug'), Drug.arel_table[:drug]
-          ]
-        ).where(Patient.arel_table[:id].eq(1)).joins(
-          Patient.arel_table.join(DrugAdministration.arel_table).on(
-            Patient.arel_table[:id].eq(DrugAdministration.arel_table[:patient_id])
-          ).join_sources
-        ).joins(
-          Patient.arel_table.join(Medication.arel_table).on(
-            DrugAdministration.arel_table[:medication_id].eq(Medication.arel_table[:id])
-          ).join_sources
-        ).joins(
-          Patient.arel_table.join(MedicationDrug.arel_table).on(
-            MedicationDrug.arel_table[:Medication_id].eq(Medication.arel_table[:id])
-          ).join_sources
-        ).joins(
-          Patient.arel_table.join(Drug.arel_table).on(
-            MedicationDrug.arel_table[:drug_id].eq(Drug.arel_table[:id])
-          ).join_sources
-        )
-        # puts str
         return str
-        # return "test"
     end
 end

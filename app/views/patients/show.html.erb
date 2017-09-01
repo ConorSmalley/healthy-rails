@@ -31,7 +31,8 @@
       </div>
       <div class="col-md-12">
         <h4>Medication</h4>
-        <%= simple_format @patient.meds %>
+        <%= simple_format @patient.medOD %>
+        <%= simple_format @patient.medHistory %>
       </div>
     </div>
     <div class="col-md-6">
