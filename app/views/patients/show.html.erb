@@ -2,8 +2,8 @@
   <div class="row">
     <div class="col-md-12">
       <p id="notice"><%= notice %></p>
-      <% if @patient.OD.present? %>
-        <p class="text-center"><%= @patient.OD %></p>
+      <% if @patient.info.present? %>
+        <%= simple_format @patient.info %>
       <% end %>
     </div>
   </div>
@@ -31,8 +31,15 @@
       </div>
       <div class="col-md-12">
         <h4>Medication</h4>
-        <%= simple_format @patient.medOD %>
+        <%= simple_format @patient.drugs %>
+      </div>
+      <div class="col-md-12">
+        <h4>Medication History</h4>
         <%= simple_format @patient.medHistory %>
+      </div>
+      <div class="col-md-12">
+        <h4>Meds</h4>
+        <%= simple_format @patient.medOD %>
       </div>
     </div>
     <div class="col-md-6">

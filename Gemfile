@@ -27,6 +27,7 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem "chartkick"
 gem 'bootstrap', '~> 4.0.0.beta'
 gem 'jquery-rails'
+gem 'table_print'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
