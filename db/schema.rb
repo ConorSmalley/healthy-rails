@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170905140510) do
+ActiveRecord::Schema.define(version: 20170905143045) do
 
   create_table "blood_groups", force: :cascade do |t|
     t.string   "bloodgroup"
@@ -64,7 +64,6 @@ ActiveRecord::Schema.define(version: 20170905140510) do
     t.integer  "drug_id"
     t.integer  "drugMg"
     t.integer  "drugMl"
-    t.string   "format"
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
   end
@@ -73,6 +72,7 @@ ActiveRecord::Schema.define(version: 20170905140510) do
     t.string   "medication"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string   "format"
   end
 
   create_table "patients", force: :cascade do |t|

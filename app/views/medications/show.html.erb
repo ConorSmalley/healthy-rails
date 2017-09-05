@@ -4,6 +4,10 @@
   <strong>Medication:</strong>
   <%= @medication.medication %>
 </p>
+<p>
+  <strong>Format:</strong>
+  <%= @medication.format %>
+</p>
 
 <%= link_to 'Edit', edit_medication_path(@medication) %> |
 <%= link_to 'Back', medications_path %>

@@ -35,7 +35,7 @@ class Patient < ActiveRecord::Base
             ).as('tst')
           ]
         # ).where(DrugAdministration.arel_table[:dt].gteq(DateTime.now-24.hours)).joins(
-        ).where(DrugAdministration.arel_table[:dt].gteq($strt)).where(DrugAdministration.arel_table[:dt].lteq($endd)).joins(
+        ).where(DrugAdministration.arel_table[:patient_id].eq(self.id)).where(DrugAdministration.arel_table[:dt].gteq($strt)).where(DrugAdministration.arel_table[:dt].lteq($endd)).joins(
           DrugAdministration.arel_table.join(Medication.arel_table).on(
             DrugAdministration.arel_table[:medication_id].eq(Medication.arel_table[:id])
           ).join_sources
@@ -58,18 +58,30 @@ class Patient < ActiveRecord::Base
     def medHistory
         str = ""
         DrugAdministration.where(patient_id: self.id, dt: $strt..$endd).each do |da|
-            str = str + da.dt.to_s + "<br>"
-            str = str + da.quantity.to_s + " x "
+          str = str + '<div class="container-fluid border">'
+          str = str + '<div class="row">'
+            str = str + '<div class="col-md-12">' + da.dt.to_s + '</div>'
+            
             Medication.where(id: da.medication_id).each do |med|
-                str = str + " " + Medication.find(med.id).formulatedName + "<br>" #med.medication
+              str = str + '<div class="col-md-12">'
+              str = str + da.quantity.to_s + (med.format == 'Liquid'? " ml " : ' ')
+              str = str + med.formulatedName + '</div>'
                 MedicationDrug.where(medication_id: med.id).each do |md|
-                    str = str + (da.quantity * md.drugMg).to_s + "Mg (" + da.quantity.to_s + " x " + md.drugMg.to_s + "Mg "
                     Drug.where(id: md.drug_id).each do |d|
-                        str = str + d.drug + ")<br>"
+                      str = str + '<div class="col-md-4">'
+                      str = str + d.drug
+                      str = str + '</div>'
+                      str = str + '<div class="col-md-2">'
+                      str = str + (da.quantity * md.drugMg / (med.format == 'Liquid'? md.drugMl : 1)).to_s + "Mg "
+                      str = str + '</div>'
+                      str = str + '<div class="col-md-6">' 
+                      str = str + "(" + da.quantity.to_s + (med.format == 'Liquid'? " ml " : ' ') + " x " + md.drugMg.to_s + "Mg" + (med.format == 'Liquid'? "/" + md.drugMl.to_s + "ml " : '')
+                      str = str + ')'
+                      str = str + '</div>'
                     end
                 end
             end
-            str = str + "<br>"
+            str = str + '</div></div>'
         end
         return str
     end

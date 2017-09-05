@@ -9,7 +9,6 @@
       <th>Drug</th>
       <th>Drugmg</th>
       <th>Drugml</th>
-      <th>Format</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -21,7 +20,6 @@
         <td><%= Drug.find(medication_drug.drug_id).drug %></td>
         <td><%= medication_drug.drugMg %></td>
         <td><%= medication_drug.drugMl %></td>
-        <td><%= medication_drug.format %></td>
         <td><%= link_to 'Show', medication_drug %></td>
         <td><%= link_to 'Edit', edit_medication_drug_path(medication_drug) %></td>
         <td><%= link_to 'Destroy', medication_drug, method: :delete, data: { confirm: 'Are you sure?' } %></td>
