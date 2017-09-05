@@ -1,64 +1,77 @@
-<div class="container-fluid">
-  <div class="row">
-    <div class="col-md-12">
-      <p id="notice"><%= notice %></p>
-      <% if @patient.info.present? %>
-        <%= simple_format @patient.info %>
-      <% end %>
-    </div>
+<% content_for :title, @patient.fullname %>
+<!--warnings-->
+<% if @patient.info.present? %>
+  <div class="col-md-12 border">
+    <%= simple_format @patient.info %>
   </div>
+<% end %>
+<!--Patient details-->
+<div class="col-md-12 border">
+  <p>
+    <strong>Name:</strong>
+    <%= @patient.fullname %>
+  </p>
+  
+  <p>
+    <strong>Gender:</strong>
+    <%= @patient.gender %>
+  </p>
+  
+  <p>
+    <strong>BloodGroup:</strong>
+    <% if @patient.bloodgroup_id.present? %>
+      <%= BloodGroup.find(@patient.bloodgroup_id).bloodgroup %>
+    <% else %>
+      NONE
+    <% end %>
+  </p>
+</div>
+<!--Search-->
+<div class="col-md-12 text-center">
+  <%= link_to '24 Hours', ('/patients/' + @patient.id.to_s) %>
+  <%= link_to '48 Hours', ('/patients/' + @patient.id.to_s + '//filter?utf8=✓&strt=' + (DateTime.now - 48.hours).to_s + '&endd=' + DateTime.now.to_s + '&commit=Search') %>
+  <%= link_to '72 Hours', ('/patients/' + @patient.id.to_s + '//filter?utf8=✓&strt=' + (DateTime.now - 72.hours).to_s + '&endd=' + DateTime.now.to_s + '&commit=Search') %>
+  <%= link_to '1 Week', ('/patients/' + @patient.id.to_s + '//filter?utf8=✓&strt=' + (DateTime.now - 1.week).to_s + '&endd=' + DateTime.now.to_s + '&commit=Search') %>
+  <%= form_tag("/patients/" + @patient.id.to_s + "/filter", method: "get") do %>
+    <%= label_tag(:strt, "From:") %>
+    <%= text_field_tag(:strt, $strt) %>
+    <%= label_tag(:endd, "To:") %>
+    <%= text_field_tag(:endd, $endd) %>
+    <%= submit_tag("Search") %>
+  <% end %>
+</div>
+<!--Recordings-->
+<div class="col-md-12">
   <div class="row">
-    <div class="col-md-6">
+    <!--Drugs-->
+    <div class="col-md-6 border">
       <div class="col-md-12">
-        <p>
-          <strong>Name:</strong>
-          <%= @patient.fullname %>
-        </p>
-        
-        <p>
-          <strong>Gender:</strong>
-          <%= @patient.gender %>
-        </p>
-        
-        <p>
-          <strong>BloodGroup:</strong>
-          <% if @patient.bloodgroup_id.present? %>
-            <%= BloodGroup.find(@patient.bloodgroup_id).bloodgroup %>
-          <% else %>
-            NONE
-          <% end %>
-        </p>
-      </div>
-      <div class="col-md-12">
-        <h4>Medication</h4>
-        <%= simple_format @patient.drugs %>
+        <h4>Drug Totals</h4>
+        <%= simple_format @patient.drugsIn24Hours %>
       </div>
       <div class="col-md-12">
         <h4>Medication History</h4>
         <%= simple_format @patient.medHistory %>
       </div>
-      <div class="col-md-12">
-        <h4>Meds</h4>
-        <%= simple_format @patient.medOD %>
-      </div>
     </div>
-    <div class="col-md-6">
+    <!--Charts-->
+    <div class="col-md-6 border">
       <div class="col-md-12 col-sm-12">
+        <%= $strt %>
         <%= line_chart [
-          {name:"pulse", data: @patient.pulses.group(:dt).maximum(:pulse)},
-          {name:"temperature", data: @patient.temperatures.group(:dt).maximum(:temperature)}
+          {name:"pulse", data: @patient.pulses.where(dt: $strt..$endd).group(:dt).maximum(:pulse)},
+          {name:"temperature", data: @patient.temperatures.where(dt: $strt..$endd).group(:dt).maximum(:temperature)}
         ]%>
       </div>
       <div class="col-md-12 col-sm-12">
         <%= line_chart [
-          {name:"Systolic", data: @patient.blood_pressures.group(:dt).maximum(:systolic)},
-          {name:"Diastolic", data: @patient.blood_pressures.group(:dt).maximum(:diastolic)}
+          {name:"Systolic", data: @patient.blood_pressures.where(dt: $strt..$endd).group(:dt).maximum(:systolic)},
+          {name:"Diastolic", data: @patient.blood_pressures.where(dt: $strt..$endd).group(:dt).maximum(:diastolic)}
         ] %>
       </div>
     </div>
   </div>
 </div>
-<!--<%= pie_chart({"Football" => 10, "Basketball" => 5}) %>-->
 
 <%= link_to 'Edit', edit_patient_path(@patient) %> |
 <%= link_to 'Back', patients_path %>

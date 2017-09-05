@@ -12,6 +12,8 @@ Rails.application.routes.draw do
   resources :patients
   
   root 'static_pages#index'
+  
+  get '/patients/:id/filter', to: 'patients#show'
 
   
   # root :to => "patients#index"  #kittens controller, index action (method)

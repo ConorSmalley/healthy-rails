@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170901140822) do
+ActiveRecord::Schema.define(version: 20170905140510) do
 
   create_table "blood_groups", force: :cascade do |t|
     t.string   "bloodgroup"
@@ -55,11 +55,8 @@ ActiveRecord::Schema.define(version: 20170901140822) do
 
   create_table "drugs", force: :cascade do |t|
     t.string   "drug"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
-    t.integer  "adult24HourDose"
-    t.integer  "otherDose"
-    t.integer  "otherDoseHours"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "medication_drugs", force: :cascade do |t|

@@ -7,27 +7,25 @@ class Patient < ActiveRecord::Base
     def fullname
         "#{title}. #{firstName} #{surname}"
     end
+    
     def info
         str = ""
-        if isOD.length > 0
-            str = str + '<p class="text-center text-danger">Overdosing on ' + isOD[0..(isOD.length - 3)] + '</p>'
-        else
-        end
         return str
     end
-    def drugs
+
+    def drugsIn24Hours
         str = ""
-    # SELECT 
-    #     drugs.drug,
-    #     sum(medication_drugs.drugMg / medication_drugs.drugMl) as 'tst'
-    # FROM 
-    # drug_administrations 
-    # inner join medications on drug_administrations.medication_id = medications.id
-    # inner join medication_drugs on medication.id = medication_drugs.medication_id
-    # inner join drugs on medication_drugs.drug_id = drugs.id
-    # where drug_administrations.dt >= 'start'
-    # group by
-    # drugs.drug
+        # SELECT 
+        #     drugs.drug,
+        #     sum(medication_drugs.drugMg / medication_drugs.drugMl) as 'tst'
+        # FROM 
+        # drug_administrations 
+        # inner join medications on drug_administrations.medication_id = medications.id
+        # inner join medication_drugs on medication.id = medication_drugs.medication_id
+        # inner join drugs on medication_drugs.drug_id = drugs.id
+        # where drug_administrations.dt >= 'start'
+        # group by
+        # drugs.drug
         abc = DrugAdministration.select(
           [
             Drug.arel_table[:drug], Arel::Nodes::NamedFunction.new(
@@ -36,7 +34,8 @@ class Patient < ActiveRecord::Base
               ]
             ).as('tst')
           ]
-        ).where(DrugAdministration.arel_table[:dt].gteq(DateTime.now-48.hours)).joins(
+        # ).where(DrugAdministration.arel_table[:dt].gteq(DateTime.now-24.hours)).joins(
+        ).where(DrugAdministration.arel_table[:dt].gteq($strt)).where(DrugAdministration.arel_table[:dt].lteq($endd)).joins(
           DrugAdministration.arel_table.join(Medication.arel_table).on(
             DrugAdministration.arel_table[:medication_id].eq(Medication.arel_table[:id])
           ).join_sources
@@ -56,46 +55,9 @@ class Patient < ActiveRecord::Base
         end
         return str
     end
-    def medOD
-        str = ""
-        str = str + '<div class="row border"><div class="col-md-4">Drug</div><div class="col-md-4">24Hr Dose</div><div class="col-md-4">Dosage/Hour</div></div>'
-        Drug.all.each do |drug|
-            drugmg24 = 0
-            
-            DrugAdministration.where(patient_id: self.id, dt: ((DateTime.now-24.hours)..DateTime.now)).each do |da|
-                Medication.where(id: da.medication_id).each do |m|
-                    MedicationDrug.where(medication_id: m.id, drug_id: drug.id).each do |md|
-                        drugmg24 = drugmg24 + (da.quantity * (md.drugMg / md.drugMl))
-                    end
-                end
-            end
-            if drugmg24 == 0
-            else
-                str = str + '<div class="row border">'
-                str = str + '<div class="col-md-4">' + drug.drug + '</div>'
-                str = str + '<div class="col-md-4'
-                if drug.adult24HourDose.present?
-                    if (drugmg24.to_i) < (drug.adult24HourDose.to_i)
-                        str = str + " text-success"
-                    else
-                        str = str + " text-danger"
-                    end
-                else
-                end
-                # (drug.adult24HourDose.present? & (drug.adult24HourDose <= drugmg) ?  'text-danger' : '' )
-                str = str + '">'#24 hour dose
-                str = str + " " + drugmg24.to_s + " mg" + (drug.adult24HourDose.present? ? " / " + drug.adult24HourDose.to_s + " mg" : "")
-                str = str + "</div>"
-                str = str + '<div class="col-md-4">'
-                str = str + "</div>"
-                str = str + "</div>"
-            end
-        end
-        return str
-    end
     def medHistory
         str = ""
-        DrugAdministration.where(patient_id: self.id).each do |da|
+        DrugAdministration.where(patient_id: self.id, dt: $strt..$endd).each do |da|
             str = str + da.dt.to_s + "<br>"
             str = str + da.quantity.to_s + " x "
             Medication.where(id: da.medication_id).each do |med|
@@ -108,31 +70,6 @@ class Patient < ActiveRecord::Base
                 end
             end
             str = str + "<br>"
-        end
-        return str
-    end
-    def isOD
-        str = ""
-        Drug.all.each do |drug|
-            drugmg24 = 0
-            
-            DrugAdministration.where(patient_id: self.id, dt: ((DateTime.now-24.hours)..DateTime.now)).each do |da|
-                Medication.where(id: da.medication_id).each do |m|
-                    MedicationDrug.where(medication_id: m.id, drug_id: drug.id).each do |md|
-                        drugmg24 = drugmg24 + (da.quantity * (md.drugMg / md.drugMl))
-                    end
-                end
-            end
-            if drugmg24 == 0
-            else
-                if drug.adult24HourDose.present?
-                    if (drugmg24.to_i) < (drug.adult24HourDose.to_i)
-                    else
-                        str = str + drug.drug + ", "
-                    end
-                else
-                end
-            end
         end
         return str
     end

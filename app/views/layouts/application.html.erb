@@ -7,31 +7,49 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-<%= link_to 'Home', static_pages_index_path %>
-<div>
-<%= yield %>
-</div>
-</br>
-
-
-<div>
-  Patients
-  <%= link_to 'Patients', patients_path %>
-</div>
-<div>
-  Stats
-  <%= link_to 'Temperatures', temperatures_path %>
-  <%= link_to 'Pulses', pulses_path %>
-  <%= link_to 'Blood Pressures', blood_pressures_path %>
-</div>
-<div>
-  Drugs
-  <%= link_to 'Medication', medications_path %>
-  <%= link_to 'medication drugs', medication_drugs_path %>
-  <%= link_to 'Drugs', drugs_path %>
-</div>
-<div>
-  <%= link_to 'Administer Drugs', drug_administrations_path %>
-</div>
+  <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+    <%= link_to 'healthy-rails', static_pages_index_path, class: "navbar-brand"%>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <%= link_to 'Home', static_pages_index_path, class: "nav-link"%>
+        </li>
+        <li class="nav-item active">
+          <%= link_to 'Patients', patients_path, class: "nav-link"%>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Stats</a>
+          <div class="dropdown-menu">
+            <%= link_to 'Temperatures', temperatures_path , class: "dropdown-item"%>
+            <%= link_to 'Pulses', pulses_path , class: "dropdown-item"%>
+            <%= link_to 'Blood Pressures', blood_pressures_path , class: "dropdown-item"%>
+            <!--<a class="dropdown-item" href="#">Something else here</a>-->
+            <!--<div class="dropdown-divider"></div>-->
+            <!--<a class="dropdown-item" href="#">Separated link</a>-->
+          </div>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Drugs</a>
+          <div class="dropdown-menu">
+            <%= link_to 'Administer Drugs', drug_administrations_path , class: "dropdown-item"%>
+            <div class="dropdown-divider"></div>
+            <%= link_to 'Medication', medications_path , class: "dropdown-item"%>
+            <%= link_to 'Medication Drugs', medication_drugs_path , class: "dropdown-item"%>
+            <%= link_to 'Drugs', drugs_path , class: "dropdown-item"%>
+            <!--<a class="dropdown-item" href="#">Something else here</a>-->
+            <!--<div class="dropdown-divider"></div>-->
+            <!--<a class="dropdown-item" href="#">Separated link</a>-->
+          </div>
+        </li>
+      </ul>
+    </div>
+  </nav>
+  <div class="container-fluid">
+  <%= yield %>
+  </div>
 </body>
 </html>

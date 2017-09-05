@@ -1,6 +1,14 @@
 class PatientsController < ApplicationController
   before_action :set_patient, only: [:show, :edit, :update, :destroy]
+  
+  before_filter :beforeFilter
 
+  def beforeFilter
+     $strt = params[:strt].present? ? params[:strt] : DateTime.now - 24.hours
+     $endd = params[:endd].present? ? params[:endd] : DateTime.now
+  end  
+  
+  
   # GET /patients
   # GET /patients.json
   def index
@@ -11,7 +19,6 @@ class PatientsController < ApplicationController
   # GET /patients/1.json
   def show
   end
-
   # GET /patients/new
   def new
     @patient = Patient.new
@@ -24,8 +31,8 @@ class PatientsController < ApplicationController
   # POST /patients
   # POST /patients.json
   def create
+    # @strt = params[:strt]
     @patient = Patient.new(patient_params)
-
     respond_to do |format|
       if @patient.save
         format.html { redirect_to @patient, notice: 'Patient was successfully created.' }
