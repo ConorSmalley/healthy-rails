@@ -29,7 +29,6 @@ gem 'bootstrap', '~> 4.0.0.beta'
 gem 'jquery-rails'
 gem 'table_print'
 gem 'seed_dump'
-gem "rubycritic", require: false
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
