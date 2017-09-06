@@ -32,6 +32,7 @@
   <%= link_to '48 Hours', ('/patients/' + @patient.id.to_s + '//filter?utf8=✓&strt=' + (DateTime.now - 48.hours).to_s + '&endd=' + DateTime.now.to_s + '&commit=Search') %>
   <%= link_to '72 Hours', ('/patients/' + @patient.id.to_s + '//filter?utf8=✓&strt=' + (DateTime.now - 72.hours).to_s + '&endd=' + DateTime.now.to_s + '&commit=Search') %>
   <%= link_to '1 Week', ('/patients/' + @patient.id.to_s + '//filter?utf8=✓&strt=' + (DateTime.now - 1.week).to_s + '&endd=' + DateTime.now.to_s + '&commit=Search') %>
+  <%= link_to '1 Month', ('/patients/' + @patient.id.to_s + '//filter?utf8=✓&strt=' + (DateTime.now - 1.month).to_s + '&endd=' + DateTime.now.to_s + '&commit=Search') %>
   <%= link_to '1 Year', ('/patients/' + @patient.id.to_s + '//filter?utf8=✓&strt=' + (DateTime.now - 1.year).to_s + '&endd=' + DateTime.now.to_s + '&commit=Search') %>
   <%= form_tag("/patients/" + @patient.id.to_s + "/filter", method: "get") do %>
     <%= label_tag(:strt, "From:") %>

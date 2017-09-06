@@ -30,7 +30,8 @@ DrugAdministration.create!([
   {patient_id: 3, medication_id: 6, dt: "2017-09-05 14:26:00", quantity: "10.0"},
   {patient_id: 3, medication_id: 3, dt: "2017-09-05 14:36:00", quantity: "5.0"},
   {patient_id: 3, medication_id: 4, dt: "2017-09-05 14:41:00", quantity: "1.0"},
-  {patient_id: 3, medication_id: 7, dt: "2017-09-05 15:30:00", quantity: "7.5"}
+  {patient_id: 3, medication_id: 7, dt: "2017-09-05 15:30:00", quantity: "7.5"},
+  {patient_id: 1, medication_id: 7, dt: "2017-09-06 11:39:00", quantity: "15.0"}
 ])
 Medication.create!([
   {medication: "Ibuprofen", format: "Tablet"},
@@ -72,7 +73,8 @@ Pulse.create!([
   {patient_id: 1, pulse: 62, dt: "2017-09-01 13:31:00"},
   {patient_id: 1, pulse: 67, dt: "2017-09-05 13:49:00"},
   {patient_id: 1, pulse: 60, dt: "2017-09-05 15:31:00"},
-  {patient_id: 1, pulse: 170, dt: "2016-11-05 15:32:00"}
+  {patient_id: 1, pulse: 170, dt: "2016-11-05 15:32:00"},
+  {patient_id: 1, pulse: 55, dt: "2017-09-06 11:39:00"}
 ])
 Temperature.create!([
   {patient_id: 1, temperature: "37.0", dt: "2017-08-30 11:00:00"},
