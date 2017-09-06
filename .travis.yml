@@ -5,3 +5,5 @@ script:
   - export RAILS_ENV=test
   - bundle exec rake db:create db:migrate
   - bundle exec rake db:test:prepare
+notifications:
+  webhooks: https://coveralls.io/webhook?repo_token=PC4C1hhFt03QdYIgfKsbvlI9WfInyMYJj
