@@ -6,7 +6,6 @@
   <thead>
     <tr>
       <th>Drug</th>
-      <th>adult24HourDose</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -15,7 +14,6 @@
     <% @drugs.each do |drug| %>
       <tr>
         <td><%= drug.drug %></td>
-        <td><%= drug.adult24HourDose %></td>
         <td><%= link_to 'Show', drug %></td>
         <td><%= link_to 'Edit', edit_drug_path(drug) %></td>
         <td><%= link_to 'Destroy', drug, method: :delete, data: { confirm: 'Are you sure?' } %></td>
