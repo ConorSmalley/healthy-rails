@@ -28,22 +28,6 @@ ActiveRecord::Schema.define(version: 20170906113505) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "contains", force: :cascade do |t|
-    t.integer  "medication_id"
-    t.integer  "drug_id"
-    t.integer  "dose"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
-  end
-
-  create_table "doses", force: :cascade do |t|
-    t.integer  "medication_id"
-    t.integer  "drug_id"
-    t.integer  "dose"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
-  end
-
   create_table "drug_administrations", force: :cascade do |t|
     t.integer  "patient_id"
     t.integer  "medication_id"

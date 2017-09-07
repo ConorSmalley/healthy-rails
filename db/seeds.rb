@@ -14,7 +14,7 @@ BloodPressure.create!([
 Drug.create!([
   {drug: "Paracetamol"},
   {drug: "Ibuprofen"},
-  {drug: "Codeine"},
+  {drug: "Codeine Phosphate"},
   {drug: "Loperamide Hydrochloride"}
 ])
 DrugAdministration.create!([
@@ -31,7 +31,11 @@ DrugAdministration.create!([
   {patient_id: 3, medication_id: 3, dt: "2017-09-05 14:36:00", quantity: "5.0"},
   {patient_id: 3, medication_id: 4, dt: "2017-09-05 14:41:00", quantity: "1.0"},
   {patient_id: 3, medication_id: 7, dt: "2017-09-05 15:30:00", quantity: "7.5"},
-  {patient_id: 1, medication_id: 7, dt: "2017-09-06 11:39:00", quantity: "15.0"}
+  {patient_id: 1, medication_id: 7, dt: "2017-09-06 11:39:00", quantity: "15.0"},
+  {patient_id: 2, medication_id: 8, dt: "2017-09-06 19:45:00", quantity: "1.0"},
+  {patient_id: 2, medication_id: 8, dt: "2017-09-07 01:40:00", quantity: "1.0"},
+  {patient_id: 2, medication_id: 8, dt: "2017-09-07 09:00:00", quantity: "1.0"},
+  {patient_id: 2, medication_id: 5, dt: "2017-09-07 09:00:00", quantity: "2.0"}
 ])
 Medication.create!([
   {medication: "Ibuprofen", format: "Tablet"},
@@ -40,7 +44,8 @@ Medication.create!([
   {medication: "Co-Codamol", format: "Tablet"},
   {medication: "Paracetamol", format: "Tablet"},
   {medication: "Paracetamol", format: "Liquid"},
-  {medication: "Ibuprofen", format: "Liquid"}
+  {medication: "Ibuprofen", format: "Liquid"},
+  {medication: "Codeine Phosphate", format: "Tablet"}
 ])
 MedicationDrug.create!([
   {medication_id: 1, drug_id: 2, drugMg: 200, drugMl: 1},
@@ -51,7 +56,8 @@ MedicationDrug.create!([
   {medication_id: 4, drug_id: 1, drugMg: 500, drugMl: 1},
   {medication_id: 5, drug_id: 1, drugMg: 500, drugMl: 1},
   {medication_id: 6, drug_id: 1, drugMg: 120, drugMl: 5},
-  {medication_id: 7, drug_id: 2, drugMg: 100, drugMl: 5}
+  {medication_id: 7, drug_id: 2, drugMg: 100, drugMl: 5},
+  {medication_id: 8, drug_id: 3, drugMg: 30, drugMl: 1}
 ])
 Patient.create!([
   {firstName: "Conor", surname: "Smalley", bloodgroup_id: 5, title: "Mr", gender: "Male"},
@@ -74,7 +80,11 @@ Pulse.create!([
   {patient_id: 1, pulse: 67, dt: "2017-09-05 13:49:00"},
   {patient_id: 1, pulse: 60, dt: "2017-09-05 15:31:00"},
   {patient_id: 1, pulse: 170, dt: "2016-11-05 15:32:00"},
-  {patient_id: 1, pulse: 55, dt: "2017-09-06 11:39:00"}
+  {patient_id: 1, pulse: 55, dt: "2017-09-06 11:39:00"},
+  {patient_id: 1, pulse: 65, dt: "2017-09-06 12:37:00"},
+  {patient_id: 1, pulse: 68, dt: "2017-09-06 18:49:00"},
+  {patient_id: 1, pulse: 61, dt: "2017-09-07 10:22:00"},
+  {patient_id: 1, pulse: 71, dt: "2017-09-07 12:14:00"}
 ])
 Temperature.create!([
   {patient_id: 1, temperature: "37.0", dt: "2017-08-30 11:00:00"},
