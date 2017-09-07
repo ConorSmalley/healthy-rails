@@ -10,6 +10,17 @@ class PulsesController < ApplicationController
   # GET /pulses/1
   # GET /pulses/1.json
   def show
+    @pulse = Pulse.find(params[:id])
+    respond_to do |format|
+      format.html # show.html.erb
+      format.json do
+        render json: {
+          id: @pulse.id,
+          firstName: @pulse.pulse,
+          surname: @pulse.dt
+        }.to_json
+      end
+    end
   end
 
   # GET /pulses/new

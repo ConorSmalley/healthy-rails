@@ -18,6 +18,24 @@ class PatientsController < ApplicationController
   # GET /patients/1
   # GET /patients/1.json
   def show
+    @patient = Patient.find(params[:id])
+    @pulses = Pulse.where(patient_id: @patient.id)
+    @temperatures = Temperature.where(patient_id: @patient.id)
+    @blood_pressures = BloodPressure.where(patient_id: @patient.id)
+    respond_to do |format|
+      format.html # show.html.erb
+      format.json do
+        render json: {
+          id: @patient.id,
+          firstName: @patient.firstName,
+          surname: @patient.surname,
+          gender: @patient.gender,
+          pulses: @pulses.as_json(:only => [ :id, :pulse, :dt ]),
+          temperatures: @temperatures.as_json(:only => [ :id, :temperature, :dt ]),
+          blood_pressures: @blood_pressures.as_json(:only => [ :id, :systolic, :diastolic, :dt ])
+        }.to_json
+      end
+    end
   end
   # GET /patients/new
   def new
