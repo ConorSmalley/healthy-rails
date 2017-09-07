@@ -2,6 +2,8 @@ class Medication < ActiveRecord::Base
     # has_many :medication_drugs
     belongs_to :medication_drugs
     has_many :drug_administrations
+    validates :medication, :presence => true
+    validates :format, :presence => true
     def contains
         str = ""
         MedicationDrug.where(medication_id: self.id).each do |md|

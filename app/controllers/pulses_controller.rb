@@ -16,8 +16,8 @@ class PulsesController < ApplicationController
       format.json do
         render json: {
           id: @pulse.id,
-          firstName: @pulse.pulse,
-          surname: @pulse.dt
+          pulse: @pulse.pulse,
+          dt: @pulse.dt
         }.to_json
       end
     end
