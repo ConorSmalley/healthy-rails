@@ -5,6 +5,8 @@ class MedicationsController < ApplicationController
   # GET /medications.json
   def index
     @medications = Medication.all
+    @medications = Medication.all.order(medication: :asc, format: :asc)
+    @medications = Medication.all.order(format: :asc, medication: :asc)
   end
 
   # GET /medications/1

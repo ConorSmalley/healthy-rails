@@ -57,7 +57,7 @@ class Patient < ActiveRecord::Base
     end
     def medHistory
         str = ""
-        DrugAdministration.where(patient_id: self.id, dt: $strt..$endd).each do |da|
+        DrugAdministration.order(dt: :desc).where(patient_id: self.id, dt: $strt..$endd).each do |da|
           str = str + '<div class="container-fluid border">'
           str = str + '<div class="row">'
             str = str + '<div class="col-md-12">' + da.dt.to_s + '</div>'

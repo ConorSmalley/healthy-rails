@@ -10,7 +10,6 @@
       </ul>
     </div>
   <% end %>
-
   <div class="field">
     <%= f.label :patient_id %><br>
     <%= collection_select(:pulse, :patient_id, Patient.all, :id, :fullname, prompt: true) %>

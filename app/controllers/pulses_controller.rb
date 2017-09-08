@@ -1,6 +1,6 @@
 class PulsesController < ApplicationController
   before_action :set_pulse, only: [:show, :edit, :update, :destroy]
-
+  
   # GET /pulses
   # GET /pulses.json
   def index
