@@ -5,11 +5,11 @@ one:
   drug_id: 1
   drugMg: 1
   drugMl: 1
-  format: MyString
+  # format: MyString
 
 two:
   medication_id: 1
   drug_id: 1
   drugMg: 1
   drugMl: 1
-  format: MyString
+  # format: MyString
