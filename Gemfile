@@ -30,7 +30,7 @@ gem "chartkick"
 gem 'bootstrap', '~> 4.0.0.beta'
 gem 'table_print'
 gem 'seed_dump'
-gem 'rspec'
+# gem 'rspec'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
