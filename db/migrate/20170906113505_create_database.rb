@@ -32,8 +32,8 @@ class CreateDatabase < ActiveRecord::Migration
   create_table "medication_drugs", force: :cascade do |t|
     t.integer  "medication_id"
     t.integer  "drug_id"
-    t.integer  "drugMg"
-    t.integer  "drugMl"
+    t.decimal  "drugMg"
+    t.decimal  "drugMl"
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
   end

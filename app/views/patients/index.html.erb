@@ -1,45 +1,28 @@
 <% content_for :title, "All Patients" %>
 <p id="notice"><%= notice %></p>
-
-<h1>Listing Patients</h1>
-
-<table>
-  <thead>
-    <tr>
-      <!--<th>Patient</th>-->
-      <th>Title</th>
-      <th>Firstname</th>
-      <th>Surname</th>
-      <th>Gender</th>
-      <th>BloodGroup</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @patients.each do |patient| %>
-      <tr>
-        <!--<td><%= patient.fullname %></td>-->
-        <td><%= patient.title %></td>
-        <td><%= patient.firstName %></td>
-        <td><%= patient.surname %></td>
-        <td><%= patient.gender %></td>
-        <td>
-          <% if patient.bloodgroup_id.present? %>
-            <%= BloodGroup.find(patient.bloodgroup_id).bloodgroup %>
-          <% else %>
-            NONE
-          <% end %>
-          
-        </td>
-        <td><%= link_to 'Show', patient %></td>
-        <td><%= link_to 'Edit', edit_patient_path(patient) %></td>
-        <td><%= link_to 'Destroy', patient, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-
 <%= link_to 'New Patient', new_patient_path %>
+<br>
+<h1>Listing Patients</h1>
+<div class="card-columns">
+  <% @patients.each do |patient| %>
+  <div class="card">
+    <div class="card-body">
+      <h4 class="card-title"><%= patient.fullname %></h4>
+      <h6 class="card-subtitle mb-2 text-muted"><%= patient.gender %></h6>
+      <p class="card-text">
+        <% if patient.bloodgroup_id.present? %>
+          <%= BloodGroup.find(patient.bloodgroup_id).bloodgroup %>
+        <% else %>
+          NONE
+        <% end %>
+      </p>
+    </div>
+    <div class="card-footer">
+      <%= link_to 'Show', patient, class: "card-link" %>
+      <%= link_to 'Edit', edit_patient_path(patient), class: "card-link" %>
+      <%= link_to 'Destroy', patient, method: :delete, class: "card-link", data: { confirm: 'Are you sure?' } %>
+    </div>
+  </div>
+  <% end %>
+</div>
+
