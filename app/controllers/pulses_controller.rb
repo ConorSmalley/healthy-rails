@@ -4,7 +4,8 @@ class PulsesController < ApplicationController
   # GET /pulses
   # GET /pulses.json
   def index
-    @pulses = Pulse.all
+    # @pulses = Pulse.all
+    @pulses = params[:patient].present? ? Pulse.all.where(patient_id: params[:patient]) : Pulse.all
   end
 
   # GET /pulses/1

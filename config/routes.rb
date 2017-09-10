@@ -14,6 +14,7 @@ Rails.application.routes.draw do
   root 'static_pages#index'
   
   get '/patients/:id/filter', to: 'patients#show'
+  # get '/temperatures/:id/filter', to: 'temperatures#index'
 
   
   # root :to => "patients#index"  #kittens controller, index action (method)

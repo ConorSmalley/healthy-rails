@@ -4,7 +4,8 @@ class DrugAdministrationsController < ApplicationController
   # GET /drug_administrations
   # GET /drug_administrations.json
   def index
-    @drug_administrations = DrugAdministration.all
+    # @drug_administrations = DrugAdministration.all
+    @drug_administrations = params[:patient].present? ? DrugAdministration.all.where(patient_id: params[:patient]) : DrugAdministration.all
   end
 
   # GET /drug_administrations/1

@@ -1,10 +1,14 @@
 class TemperaturesController < ApplicationController
   before_action :set_temperature, only: [:show, :edit, :update, :destroy]
-
+  
+  def beforeFilter
+    $patient = params[:patient].present? ? params[:patient] : ''
+  end  
   # GET /temperatures
   # GET /temperatures.json
   def index
-    @temperatures = Temperature.all
+    # @temperatures = Temperature.all
+    @temperatures = params[:patient].present? ? Temperature.all.where(patient_id: params[:patient]) : Temperature.all
   end
 
   # GET /temperatures/1

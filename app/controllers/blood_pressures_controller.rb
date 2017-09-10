@@ -4,7 +4,8 @@ class BloodPressuresController < ApplicationController
   # GET /blood_pressures
   # GET /blood_pressures.json
   def index
-    @blood_pressures = BloodPressure.all
+    # @blood_pressures = BloodPressure.all
+    @blood_pressures = params[:patient].present? ? BloodPressure.all.where(patient_id: params[:patient]) : BloodPressure.all
   end
 
   # GET /blood_pressures/1
