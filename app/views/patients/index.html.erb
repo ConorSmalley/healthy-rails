@@ -3,7 +3,11 @@
 <%= link_to 'New Patient', new_patient_path %>
 <br>
 <h1>Listing Patients</h1>
-<div class="card-columns">
+<% if @patients.count < 5 %>
+  <div class="card-deck">
+<% else %>
+  <div class="card-columns">
+<% end %>
   <% @patients.each do |patient| %>
   <div class="card">
     <div class="card-body">

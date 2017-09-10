@@ -12,7 +12,7 @@ class PatientsController < ApplicationController
   # GET /patients
   # GET /patients.json
   def index
-    @patients = Patient.all
+    @patients = Patient.all.order(surname: :asc, firstName: :asc)
   end
 
   # GET /patients/1
