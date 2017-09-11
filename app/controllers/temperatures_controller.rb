@@ -18,6 +18,7 @@ class TemperaturesController < ApplicationController
 
   # GET /temperatures/new
   def new
+     @patient = params[:patient].present? ? params[:patient] : ''
     @temperature = Temperature.new
   end
 

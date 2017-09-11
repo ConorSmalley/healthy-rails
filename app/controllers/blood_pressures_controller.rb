@@ -15,6 +15,7 @@ class BloodPressuresController < ApplicationController
 
   # GET /blood_pressures/new
   def new
+     @patient = params[:patient].present? ? params[:patient] : ''
     @blood_pressure = BloodPressure.new
   end
 

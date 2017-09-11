@@ -12,7 +12,7 @@
   <% end %>
   <div class="field">
     <%= f.label :patient_id %><br>
-    <%= collection_select(:pulse, :patient_id, Patient.all, :id, :fullname, prompt: true) %>
+    <%= collection_select(:pulse, :patient_id, Patient.all, :id, :fullname, selected: @patient, prompt: true) %>
   </div>
   <div class="field">
     <%= f.label :pulse %><br>

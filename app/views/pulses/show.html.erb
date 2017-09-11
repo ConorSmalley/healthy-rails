@@ -16,4 +16,5 @@
 </p>
 
 <%= link_to 'Edit', edit_pulse_path(@pulse) %> |
-<%= link_to 'Back', pulses_path %>
+<%= link_to 'Back to Pulses', pulses_path %> |
+<%= link_to 'To Patient', ('/patients/' + @pulse.patient_id.to_s) %>

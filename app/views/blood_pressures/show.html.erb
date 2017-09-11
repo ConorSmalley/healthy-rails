@@ -21,4 +21,5 @@
 </p>
 
 <%= link_to 'Edit', edit_blood_pressure_path(@blood_pressure) %> |
-<%= link_to 'Back', blood_pressures_path %>
+<%= link_to 'Back', blood_pressures_path %> |
+<%= link_to 'To Patient', ('/patients/' + @pulse.patient_id.to_s) %>

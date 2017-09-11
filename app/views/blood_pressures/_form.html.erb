@@ -13,7 +13,7 @@
 
   <div class="field">
     <%= f.label :patient_id %><br>
-    <%= collection_select(:blood_pressure, :patient_id, Patient.all, :id, :fullname, prompt: true) %>
+    <%= collection_select(:blood_pressure, :patient_id, Patient.all, :id, :fullname, selected: @patient, prompt: true) %>
   </div>
   <div class="field">
     <%= f.label :systolic %><br>

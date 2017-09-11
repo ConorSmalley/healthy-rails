@@ -26,6 +26,7 @@ class PulsesController < ApplicationController
 
   # GET /pulses/new
   def new
+    @patient = params[:patient].present? ? params[:patient] : ''
     @pulse = Pulse.new
   end
 
